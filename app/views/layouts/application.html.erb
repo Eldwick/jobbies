@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jobbies</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<header class="navbar navbar-default" id='header'>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+      <a id="logoHeader"class="navbar-brand" href="/">
+        Jobbies
+      </a>
+    </div>
+    <div class="collapse navbar-collapse">
+      <% if user_signed_in? %>
+      <ul id="navLinks" class="nav navbar-nav navbar-left">
+        <li><a href="/portal">Portal</a></li>
+      </ul>
+      <ul id="navLinks" class="nav navbar-nav navbar-right">
+        <li><a href="/signin">Companies</a></li>
+        <li><a href="/signin">Jobs</a></li>
+        <li><a href="/signin">Applications</a></li>
+        <li><a href="/signin">Contacts</a></li>
+        <li><a href="/signin">Tasks</a></li>
+        <li><a href="/signin">Account</a></li>
+      </ul>
+      <% else %>
+      <ul id="navLinks" class="nav navbar-nav navbar-right">
+        <li><a href="/register">Sign up</a></li>
+        <li><a href="/signin">Sign in</a></li>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+</header>
+<!-- <span class="notice"><%= notice %></span>
+<span class="alert"><%= alert %></span> -->
+<%= yield %>
+
+</body>
+</html>

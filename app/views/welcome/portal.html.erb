@@ -1,0 +1,24 @@
+<div id="portalWrapper">
+  <section id="portalReports">
+    <div id="applicationReport">
+      <h2>Your Applications</h2>
+    </div>
+    <div id="actionReport">
+      <h2>Your Tasks</h2>
+    </div>
+  </section>
+  <section id="portalBottom">
+    <div id="recentContacts">
+      <h3>Recent Contacts</h3>
+    </div>
+    <div id="similarCompanies">
+      <h3>Recent Companies</h3>
+      <% @companies.each do |company| %>
+        <%= link_to company.name, company_path(company) %> 
+      <% end %>
+    </div>
+    <div id="similarJobs">
+      <h3>Recent Jobs</h3>
+    </div>
+  </section>
+</div>

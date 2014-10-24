@@ -1,0 +1,25 @@
+// Place all the styles related to the Companies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+
+#companyWrapper {
+  @extend .container;
+  background-color: #B8C3DE;
+  height: 100%;
+  #companyTop {
+    @extend .row;
+  }
+}
+
+#companyPic {
+  @extend .col-md-3;
+}
+
+#companyFacts {
+  @extend .col-md-9;
+}
+#cpic {
+  height: 250px;
+  background: grey;
+}

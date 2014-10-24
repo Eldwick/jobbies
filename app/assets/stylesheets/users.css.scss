@@ -1,0 +1,29 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+
+#loginWrapper, #registrationWrapper {
+  @extend .container;
+  background-color: #B8C3DE;
+  height: calc(100% - 50px);
+  h2 {
+    text-align: center;
+  }
+}
+
+#new_user {
+  @extend .form-horizontal;
+  label {
+    @extend .col-md-2;
+    text-align: right;
+  }
+
+  input {
+    @extend .col-md-8;
+  }
+
+  input[type="submit"]  {
+    @extend .col-md-offset-2;
+  }
+}

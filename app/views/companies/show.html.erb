@@ -1,0 +1,17 @@
+<div id="companyWrapper">
+  <section id="companyTop">
+    <div id="companyPic">
+      <img id="cpic" src="#">
+    </div>
+    <div class="companyFacts">
+      <h2 class="companyName"><%= @company.name %></h2>
+      <p class="companyAddress">
+       Location: <%= @company.street_address %>, <%= @company.city %>, <%= @company.state %>, <%= @company.zip_code %>
+      </p>
+      <p class="numEmployees">Number of Employees: <%= @company.num_employees %></p>
+      <p class="companyCategory">Sector: <%= @company.category %></p>
+      <p class="companyRating">Rating: <%= @company.rating %></p>
+
+    </div>
+  </section>
+</div>

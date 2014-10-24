@@ -1,0 +1,66 @@
+// Place all the styles related to the Welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+
+#banner {
+  height: 300px;
+  width: 100%;
+  min-width: 100%;
+  background-color: grey;
+  #splashSearch {
+    text-align: center;
+    color: white;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    h1 {
+      margin: 0;
+      font-size: 70px;
+      font-style: italic;
+    }
+    input {
+      color: black;
+      width: 40%;
+      height: 40px;
+      min-width: 260px;
+    }
+  }
+}
+
+#splashWrapper {
+  @extend .container;
+  background-color: #B8C3DE;
+  height: calc(100% - 350px);
+  #splashContent{
+    @extend .row;
+  }
+}
+
+#companiesSplash, #jobsSplash {
+  @extend .col-md-6;
+  text-align: center;
+}
+
+#portalWrapper {
+  @extend .container;
+  background-color: #B8C3DE;
+  height: 100%;
+}
+
+#portalReports {
+  @extend .row;
+  height: 50%;
+  text-align: center;
+  #applicationReport, #actionReport {
+    @extend .col-md-6;
+  }
+}
+
+#portalBottom {
+  @extend .row;
+  text-align: center;
+  #similarCompanies, #similarJobs, #recentContacts{
+    @extend .col-md-4;
+  }
+}

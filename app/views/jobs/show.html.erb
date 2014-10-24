@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Average pay:</strong>
+  <%= @job.average_pay %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @job.description %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @job.name %>
+</p>
+
+<p>
+  <strong>Street address:</strong>
+  <%= @job.street_address %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @job.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @job.state %>
+</p>
+
+<p>
+  <strong>Qualifications:</strong>
+  <%= @job.qualifications %>
+</p>
+
+<p>
+  <strong>Zip code:</strong>
+  <%= @job.zip_code %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @job.company_id %>
+</p>
+
+<%= link_to 'Edit', edit_job_path(@job) %> |
+<%= link_to 'Back', jobs_path %>
