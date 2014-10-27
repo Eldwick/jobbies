@@ -11,22 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141024135607) do
+ActiveRecord::Schema.define(version: 20141027151711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "actions", force: true do |t|
-    t.string   "status"
-    t.datetime "due_date"
-    t.text     "notes_before"
-    t.text     "notes_after"
-    t.integer  "contact_id"
-    t.integer  "application_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "applications", force: true do |t|
     t.string   "status"
@@ -42,34 +30,45 @@ ActiveRecord::Schema.define(version: 20141024135607) do
     t.string   "city"
     t.string   "state"
     t.integer  "zip_code"
-    t.integer  "num_employees"
-    t.integer  "rating"
+    t.string   "num_employees"
+    t.float    "rating"
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "website"
   end
 
   create_table "contacts", force: true do |t|
-    t.string   "name"
     t.string   "email"
-    t.integer  "primary_phone"
-    t.integer  "secondary_phone"
+    t.integer  "primary_phone",   limit: 8
+    t.integer  "secondary_phone", limit: 8
     t.string   "title"
     t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   create_table "jobs", force: true do |t|
     t.integer  "average_pay"
     t.text     "description"
     t.string   "name"
-    t.string   "street_address"
-    t.string   "city"
-    t.string   "state"
     t.text     "qualifications"
-    t.integer  "zip_code"
     t.integer  "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "location"
+  end
+
+  create_table "tasks", force: true do |t|
+    t.string   "status"
+    t.datetime "due_date"
+    t.text     "notes_before"
+    t.text     "notes_after"
+    t.integer  "contact_id"
+    t.integer  "application_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

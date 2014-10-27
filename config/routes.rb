@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
-  devise_for :users
+  get 'task/index'
+
+  get 'task/show'
+
+  get 'task/edit'
+
+  get 'task/update'
+
+  get 'task/new'
+
+  get 'task/create'
+
+  devise_for :users, controllers: { registrations: 'registrations' }
+
+
   root 'welcome#splash'
 
   get '/portal', to: "welcome#portal"

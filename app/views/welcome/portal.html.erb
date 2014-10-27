@@ -13,9 +13,11 @@
     </div>
     <div id="similarCompanies">
       <h3>Recent Companies</h3>
+      <ul>
       <% @companies.each do |company| %>
-        <%= link_to company.name, company_path(company) %> 
+        <li><%= link_to company.name, company_path(company) %></li>
       <% end %>
+      </ul>
     </div>
     <div id="similarJobs">
       <h3>Recent Jobs</h3>
