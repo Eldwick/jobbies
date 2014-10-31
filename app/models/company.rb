@@ -12,10 +12,18 @@ class Company < ActiveRecord::Base
     [street_address, city, state, zip_code].compact.join(', ')
   end
 
+  def self.save_geo
+    all.each do |company|
+      if company.latitude.nil?
+        company.save
+      end
+    end
+  end
+
   def self.addresses_array
     addresses_array = []
-    limit(200).each do |company|
-      addresses_array << [company.latitude, company.longitude, company.name , company.id, company.img_url] if company.longitude 
+    all.each do |company|
+      addresses_array << [company.latitude, company.longitude, company.name , company.id, company.img_url, company.jobs.count] if company.longitude 
     end
     addresses_array
   end

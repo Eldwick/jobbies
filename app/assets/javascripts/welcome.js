@@ -42,7 +42,8 @@ function initialize() {
 
     var contentString = "<p><img src='"+companies_addresses[company_index][4]+"'></p><a href='/companies/"+
       companies_addresses[company_index][3]+"'><h1> "
-       +  companies_addresses[company_index][2] +" </h1></a>"
+       +  companies_addresses[company_index][2] +" </h1></a>" +
+       "<h4>Check out the " + companies_addresses[company_index][5] + " jobs on record.</h4>";
 
     var infowindow = new google.maps.InfoWindow({
       content: contentString
