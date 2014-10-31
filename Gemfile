@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem "rails_12factor"
 gem 'awesome_print'
 gem "chartkick"
 gem "geocoder"
