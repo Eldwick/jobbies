@@ -1,0 +1,43 @@
+<div id="taskShowWrapper">
+  <p> <%= link_to("#{@task.application.job.name} for #{@task.application.job.company.name}", application_path(@task.application)) %></p>
+  <%= form_for(@task) do |f| %>
+  <h2><%= @task.subject %></h2>
+  <div class="form-group required">
+  <%= f.text_field :subject, placeholder:"Subject",class: "form-control" %>
+  </div>
+  <div class="form-group required">
+    <%= f.label :due_date, "Due Date*" %>
+    <%= f.date_select :due_date,class: "form-control" %>
+  </div>
+
+  <div class="form-group required">
+    <%= f.label :notes_before, "Notes Before" %>
+    <%= f.text_area :notes_before, placeholder:"Notes" %>
+  </div>
+
+  <div class="form-group required">
+    <%= f.label :notes_after, "Notes After" %>
+    <%= f.text_area :notes_after, placeholder:"Notes" %>
+  </div>
+
+  <div class="form-group required">
+    <%= f.label :contact_id, "Contact" %>
+    <%= f.collection_select(:contact_id, @task.application.job.company.contacts, :id, :full_name, {prompt: "No Contact"}, class: "form-control" ) %>
+  </div>
+  <% if @task.contact %>
+  <ul>
+    <li>Primary Phone: <%= number_to_phone(@task.contact.primary_phone, area_code: true)  %></li>
+    <li>Secondary Phone: <%= number_to_phone(@task.contact.secondary_phone, area_code: true)  %></li>
+    <li>Email: <%= mail_to(@task.contact.email, @task.contact.email) %></li>
+  </ul> 
+  <% end %>
+    <%= f.hidden_field :application_id, value: @task.application.id%>
+    <%= f.submit "Edit"%>
+    <% if @task.pending %>
+    <%= f.submit "Complete"%>
+    <%= f.submit "Complete and New"%>
+    <% else %>
+    <%= f.submit "Revert to Pending"%>
+    <% end %>
+  <% end %>
+</div>

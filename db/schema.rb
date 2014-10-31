@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141027151711) do
+ActiveRecord::Schema.define(version: 20141030100256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "applications", force: true do |t|
-    t.string   "status"
+    t.string   "status",     default: "Not Started"
     t.integer  "user_id"
     t.integer  "job_id"
     t.datetime "created_at"
@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(version: 20141027151711) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "website"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.string   "img_url"
   end
 
   create_table "contacts", force: true do |t|
@@ -59,18 +62,20 @@ ActiveRecord::Schema.define(version: 20141027151711) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "location"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "tasks", force: true do |t|
-    t.string   "status"
     t.datetime "due_date"
     t.text     "notes_before"
     t.text     "notes_after"
     t.integer  "contact_id"
     t.integer  "application_id"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "subject"
+    t.boolean  "pending",        default: true
   end
 
   create_table "users", force: true do |t|
@@ -94,6 +99,8 @@ ActiveRecord::Schema.define(version: 20141027151711) do
     t.string   "city"
     t.string   "state"
     t.integer  "zip_code",               limit: 2
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

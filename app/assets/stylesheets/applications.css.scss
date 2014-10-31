@@ -1,3 +1,28 @@
 // Place all the styles related to the Applications controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+
+#newAppWrapper, #applicationProcessWrapper {
+  @extend .container;
+  background-color: #B8C3DE;
+  min-height: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+#new_application {
+  @extend .form-horizontal;
+  label {
+    @extend .col-md-2;
+    text-align: right;
+  }
+  input, select {
+    @extend .col-md-8;
+  }
+  input[type="submit"]  {
+    @extend .col-md-offset-2;
+    @extend .btn;
+    @extend .btn-success;
+  }
+}

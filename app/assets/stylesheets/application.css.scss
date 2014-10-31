@@ -22,14 +22,29 @@ body {
   min-height: 100%;
 }
 
+body {
+  background: image-url('cubes.png') repeat;
+}
+
 #header {
   margin-bottom: 0;
   padding-bottom: 0;
+  background-color: #0C2F3D;
+  border: 0;
+  border-radius: 0;
+  ul {
+    background-color: #0C2F3D;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
   #navLinks {
     font-size: 20px;
+    a {
+     color: white;
+    }
   }
   #logoHeader {
     font-size: 30px;
-    color: green;
+    color: #E53A31;
   }
 }

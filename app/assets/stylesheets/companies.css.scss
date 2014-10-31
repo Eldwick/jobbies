@@ -3,23 +3,67 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "bootstrap";
 
-#companyWrapper {
+#companyWrapper, #newCompanyWrapper {
   @extend .container;
   background-color: #B8C3DE;
-  height: 100%;
-  #companyTop {
+  min-height: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
+  #companyTop, .companyJobs {
     @extend .row;
   }
 }
 
-#companyPic {
-  @extend .col-md-3;
+.companyTop {
+  background: image-url('banner4.jpg') no-repeat;
+  background-size: cover;
 }
 
-#companyFacts {
-  @extend .col-md-9;
+#companyPic {
+  @extend .row;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  img {
+    @extend .img-responsive;
+    border-radius: 20px;
+    min-width: 300px;
+    margin: 0 auto;
+    border: 3px solid #0C2F3D; 
+  }
 }
-#cpic {
-  height: 250px;
-  background: grey;
+h2 {
+    a{
+      color: #E53A31;
+      text-shadow: 2px 2px 2px #0C2F3D;
+    }
+  }
+.companyFacts {
+  @extend .row;
+  background-color: rgba(255, 255, 255, 0.4);
+
+  a {
+    font-style: italic;
+    text-decoration:underline  
+  }
+  .companyDetail {
+    @extend .col-8-md;
+    @extend .col-md-offset-2;
+    p {
+      padding-left: 20px;
+      color: #0C2F3D;
+      font-weight: bold;
+      font-size: 16px;
+    }
+  }
 }
+
+.companyJobs {
+  h3 {
+    color: white;
+    text-shadow: 2px 2px 2px #E53A31;
+  }
+  table {
+    font-size: 18px;
+  }
+}
+

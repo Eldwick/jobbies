@@ -1,26 +1,47 @@
 <div id="portalWrapper">
+  <h1 class="text-center"> Your Portal </h1>
+  <section class="portalBottom">
+    <div class="col-md-6">
+    <h2>Applications</h2>
+    <table class="table table-hover">
+      <% current_user.applications.each do |application| %>
+      <tr class='job_row' href="/applications/<%= application.id %>">
+        <td><%= "#{application.job.name}" %> </td>
+        <td><%= "#{application.status}" %> </td>
+        <td><%= "#{application.job.company.name}" %> </td>
+      </tr>
+      <% end %>
+    </table>
+    </div>
+    <div class="col-md-6">
+    <h2>Pending Tasks</h2>
+    <table class="table table-hover">
+      <% current_user.pending_tasks.each do |task| %>
+      <tr class='job_row' href="/tasks/<%= task.id %>">
+        <td><%= "#{task.subject}" %> </td>
+        <td><%= "#{task.due_date.strftime("%B %d, %Y")}" %> </td>
+        <td><%= "#{task.application.job.name}" %> </td>
+      </tr>
+      <% end %>
+    </table>
+    </div>
+  </section>
   <section id="portalReports">
     <div id="applicationReport">
-      <h2>Your Applications</h2>
+      <h2>Applications Reports</h2>
+      <h4>Status Breakdown</h4>
+      <%= pie_chart current_user.applications.group(:status).count %>
+      <ul>
+
     </div>
     <div id="actionReport">
-      <h2>Your Tasks</h2>
+      <h2>Tasks Reports</h2>
+      <h4>Timeline</h4>
+      <%= timeline current_user.pending_tasks.collect{|c| [c.subject, c.due_date - 1, c.due_date]} %>
+      <h4>Due Date</h4>
+      <%= column_chart current_user.tasks.group(:due_date).count %>
+
     </div>
   </section>
-  <section id="portalBottom">
-    <div id="recentContacts">
-      <h3>Recent Contacts</h3>
-    </div>
-    <div id="similarCompanies">
-      <h3>Recent Companies</h3>
-      <ul>
-      <% @companies.each do |company| %>
-        <li><%= link_to company.name, company_path(company) %></li>
-      <% end %>
-      </ul>
-    </div>
-    <div id="similarJobs">
-      <h3>Recent Jobs</h3>
-    </div>
-  </section>
+
 </div>

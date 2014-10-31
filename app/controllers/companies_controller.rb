@@ -1,3 +1,5 @@
+require 'open-uri'
+require 'pry'
 class CompaniesController < ApplicationController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
@@ -10,6 +12,9 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
+    current_user.geocode
+    @distance = current_user.distance_from(@company.geocode)
+    @distance = @distance.to_i unless @distance.nan?
   end
 
   # GET /companies/new
@@ -61,6 +66,24 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def create_from_linkedin
+    check_company = Company.where("lower(name) like ?", "#{params[:companyname].downcase}" )
+    if !check_company.blank?
+      return redirect_to company_path(check_company[0])
+    end
+    company_name = params[:companyname].downcase 
+    company = Company.create_from_linkedin(company_name)
+    if company
+      redirect_to company_path(company)
+    else
+      redirect_to new_company_path
+    end
+  end
+
+  def search
+    @companies = Company.search(name: params[:name][0].downcase, city: params[:city][0].downcase, category: params[:category][0].downcase)
+    render "index"
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company

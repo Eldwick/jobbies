@@ -1,0 +1,27 @@
+<div id="newTaskWrapper">
+  <h2>New Task for <%= @application.job.name %> at <%= @application.job.company.name  %></h2>
+  <%= form_for(@task) do |f| %>
+    <%= f.hidden_field :application_id, value: @application.id%>
+
+    <div class="form-group required">
+    <%= f.label :subject, "Subject*" %>
+    <%= f.text_field :subject, placeholder:"Subject",class: "form-control" %>
+    </div>
+    <div class="form-group required">
+      <%= f.label :due_date, "Due Date*" %>
+      <%= f.date_select :due_date %>
+    </div>
+
+    <div class="form-group required">
+      <%= f.label :notes_before, "Notes" %>
+      <%= f.text_area :notes_before, placeholder:"Notes" %>
+    </div>
+
+    <div class="form-group required">
+    <%= f.label :contact_id, "Contact" %>
+    <%= f.collection_select(:contact_id, @application.job.company.contacts, :id, :full_name, {prompt: "No Contact"}, class: "form-control" ) %>
+    </div>
+    <%= f.submit %>
+  <% end %>
+</div>
+

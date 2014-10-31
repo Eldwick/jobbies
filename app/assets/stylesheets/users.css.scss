@@ -6,7 +6,7 @@
 #loginWrapper, #registrationWrapper {
   @extend .container;
   background-color: #B8C3DE;
-  height: calc(100% - 50px);
+  min-height: calc(100% - 50px);
   h2 {
     text-align: center;
   }

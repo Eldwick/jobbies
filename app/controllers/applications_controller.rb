@@ -4,7 +4,7 @@ class ApplicationsController < ApplicationController
   # GET /applications
   # GET /applications.json
   def index
-    @applications = Application.all
+    @applications = current_user.applications
   end
 
   # GET /applications/1
@@ -14,7 +14,9 @@ class ApplicationsController < ApplicationController
 
   # GET /applications/new
   def new
+    @job = Job.find(params[:job_id])
     @application = Application.new
+    @task = Task.new
   end
 
   # GET /applications/1/edit
@@ -24,16 +26,13 @@ class ApplicationsController < ApplicationController
   # POST /applications
   # POST /applications.json
   def create
-    @application = Application.new(application_params)
+    @application = current_user.applications.build(application_params)
 
-    respond_to do |format|
-      if @application.save
-        format.html { redirect_to @application, notice: 'Application was successfully created.' }
-        format.json { render :show, status: :created, location: @application }
-      else
-        format.html { render :new }
-        format.json { render json: @application.errors, status: :unprocessable_entity }
-      end
+    if @application.save
+      redirect_to portal_path
+    else
+      format.html { render :new }
+      format.json { render json: @application.errors, status: :unprocessable_entity }
     end
   end
 
@@ -69,6 +68,6 @@ class ApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def application_params
-      params.require(:application).permit(:status)
+      params.require(:application).permit(:status, :job_id, tasks_attributes: [:subject, :due_date, :notes_before, :contact_id])
     end
 end

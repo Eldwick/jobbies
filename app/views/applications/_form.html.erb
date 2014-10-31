@@ -10,11 +10,35 @@
       </ul>
     </div>
   <% end %>
+  <%= f.hidden_field :job_id, value: @job.id%>
 
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
+  <div class="form-group required">
+    <%= f.label :status, "Stage in Process*" %>
+    <%= f.select(:status, @application.status_options, {}, class: "form-control" ) %>
   </div>
+
+  <h3>First Task</h3>
+  <%=f.fields_for :tasks, @application.tasks.build() do |task_form| %>
+    <div class="form-group required">
+    <%= task_form.label :subject, "Subject*" %>
+    <%= task_form.text_field :subject, placeholder:"Subject",class: "form-control" %>
+    </div>
+    <div class="form-group required">
+      <%= task_form.label :due_date, "Due Date*" %>
+      <%= task_form.date_field :due_date,class: "form-control" %>
+    </div>
+
+    <div class="form-group required">
+      <%= task_form.label :notes_before, "Notes" %>
+      <%= task_form.text_area :notes_before, placeholder:"Notes" %>
+    </div>
+
+    <div class="form-group required">
+    <%= task_form.label :contact_id, "Contact" %>
+    <%= task_form.collection_select(:contact_id, @job.company.contacts, :id, :full_name, {prompt: "No Contact"}, class: "form-control" ) %>
+    </div>
+  <% end %>
+  
   <div class="actions">
     <%= f.submit %>
   </div>

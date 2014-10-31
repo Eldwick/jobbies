@@ -1,6 +1,21 @@
+<div id="jobsWrapper">
 <h1>Listing companies</h1>
 
-<table>
+<%= form_tag(company_search_path, method: :get) do %>
+  <div class="form-group">
+  <%= text_field :name, nil,  placeholder: "Company Name", class: "form-control" %>
+  </div>
+  <div class="form-group">
+  <%= select(:city, nil, Company.select(:city).uniq.collect {|c| [c.city, c.city]}, prompt: "Pick City", class: "form-control") %>
+  </div>
+  <div class="form-group">
+  <%= select(:category, nil, Company.select(:category).collect {|c| [c.category, c.category]}, prompt: "Pick Category", class: "form-control") %>
+  </div>
+  <%= submit_tag "Search Companies", class: "btn btn-primary"  %>
+<% end %>
+
+
+<table class="table">
   <thead>
     <tr>
       <th>Name</th>
@@ -26,14 +41,9 @@
         <td><%= company.num_employees %></td>
         <td><%= company.rating %></td>
         <td><%= company.category %></td>
-        <td><%= link_to 'Show', company %></td>
-        <td><%= link_to 'Edit', edit_company_path(company) %></td>
-        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
 
-<br>
-
-<%= link_to 'New Company', new_company_path %>

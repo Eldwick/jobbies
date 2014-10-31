@@ -1,9 +1,22 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @application.status %>
-</p>
-
-<%= link_to 'Edit', edit_application_path(@application) %> |
-<%= link_to 'Back', applications_path %>
+<div id="applicationProcessWrapper">
+  <h2>Application for <%=link_to @application.job.name, job_path(@application.job) %> at <%=link_to @application.job.company.name, company_path(@application.job.company) %></h2>
+  <%= form_for(@application) do |f| %>
+    <div class="form-group required">
+      <%= f.label :status, "Stage in Process" %>
+      <%= f.select(:status, @application.status_options, {}, class: "form-control", onchange: "$('.edit_application').submit()"  ) %>
+    </div>
+  <% end %>
+  <h3>Pending Tasks</h3>
+  <ul>
+  <% @application.pending_tasks.each do |task| %>
+    <li><%= link_to(task.subject, task_path(task)) %></li>
+  <% end %>
+  </ul>
+  <h3>Completed Tasks</h3>
+  <ul>
+  <% @application.completed_tasks.each do |task| %>
+    <li><%= link_to(task.subject, task_path(task)) %></li>
+  <% end %>
+  </ul>
+  <%= link_to("Create a new task", new_task_path(@application), class: "btn btn-success") %>
+</div>

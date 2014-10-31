@@ -1,18 +1,30 @@
 Rails.application.routes.draw do
-  get 'task/index'
 
-  get 'task/show'
+  resources :tasks, except: :new
 
-  get 'task/edit'
+  resources :applications, except: :new
 
-  get 'task/update'
+  resources :contacts
 
-  get 'task/new'
+  resources :jobs
 
-  get 'task/create'
+  resources :companies
+
+  get 'welcome/search', to: "welcome#search", as: :welcome_search
+  
+  get 'company/search', to: "companies#search", as: :company_search
+
+  get 'job/search', to: "jobs#search", as: :job_search
+
+  post 'company/create_from_linkedin', to: "companies#create_from_linkedin", as: :create_linkedin_company
+
+  post 'job/create_from_linkedin', to: "jobs#create_from_linkedin", as: :create_linkedin_job
+
+  get 'task/new/:application_id', to: "tasks#new", as: :new_task
+
+  get 'application/new/:job_id', to: "applications#new", as: :new_application
 
   devise_for :users, controllers: { registrations: 'registrations' }
-
 
   root 'welcome#splash'
 
@@ -23,18 +35,7 @@ Rails.application.routes.draw do
     get '/register', to: 'devise/registrations#new'
   end
 
-  resources :actions
-
-  resources :applications
-
-  resources :contacts
-
-  resources :jobs
-
-  resources :companies
-
   resources :users
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

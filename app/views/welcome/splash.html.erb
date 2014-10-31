@@ -1,16 +1,48 @@
 <section id="banner">
   <div id="splashSearch">
-    <h1>Jobbies</h1>
-    <input type="text" placeholder="Search for your next job">
+    <div class="container">
+      <div class="row">
+        <h1>Your Job Tracker</h1>
+      </div>
+    <div class="row">
+    <%= form_tag(welcome_search_path, method: :get)  do%>
+    <div class="input-group col-md-6 col-md-offset-3">
+      <%= text_field :name, nil,  placeholder: "Start the track to your dream workplace", class: "form-control" %>
+      <span class="input-group-btn">
+      <%= submit_tag "Search Companies", class: "btn searchCompanies btn-primary" %>
+      <%= submit_tag "Search Jobs", class: "btn btn-danger" %>
+      </span>
+      </div>
+    </div>
+    <% end %>
+    </div>
   </div>
 </section>
 <div id="splashWrapper">
   <section id="splashContent">
     <div id="companiesSplash">
       <h2>Companies</h2>
+      <p class="count"><%= @companies.count %> teams to join</p>
+      <table class="table table-hover" data-card-view="true">
+        <tbody>
+      <% @companies.sample(8).each do |company| %>
+          <tr>
+            <td class='company_row' href="/companies/<%= company.id %>"><%= "#{company.name}  (#{company.jobs.count} jobs)"%></td>
+          </tr>
+      <% end %>
+        </tbody>
+      </table>
     </div>
     <div id="jobsSplash">
       <h2>Jobs</h2>
+      <p class="count"><%= @jobs.count %> opportunities to take</p>
+      <table class="table table-hover">
+      <% @jobs.sample(8).each do |job| %>
+      <tr>
+        <td class='job_row' href="/jobs/<%= job.id %>"><%= "#{job.name}  (#{job.company.name})" %> </td>
+      </tr>
+      <% end %>
+      </table> 
     </div>
   </section>
 </div>

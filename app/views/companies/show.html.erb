@@ -1,17 +1,54 @@
-<div id="companyWrapper">
-  <section id="companyTop">
+<div class="companyTop">
     <div id="companyPic">
-      <img id="cpic" src="#">
+      <%= image_tag(@company.img_url) %>
     </div>
     <div class="companyFacts">
-      <h2 class="companyName"><%= @company.name %></h2>
-      <p class="companyAddress">
-       Location: <%= @company.street_address %>, <%= @company.city %>, <%= @company.state %>, <%= @company.zip_code %>
-      </p>
-      <p class="numEmployees">Number of Employees: <%= @company.num_employees %></p>
-      <p class="companyCategory">Sector: <%= @company.category %></p>
-      <p class="companyRating">Rating: <%= @company.rating %></p>
-
+      <div class="companyDetail">
+        <h2 class="companyName"><%= link_to(@company.name, "https://www.linkedin.com/company/#{@company.name.downcase.strip.gsub(' ', '-')}", target: "blank") %></h2>
+        <% if @company.address %>
+        <p class="companyAddress">
+         Location: <%= @company.address %>
+         <br>
+         <%= link_to("About #{@distance} miles away from you", "https://www.google.com/maps/dir/#{@company.address.gsub(" ","+")}/#{current_user.address}", target: "blank") %>
+        </p>
+        <% end %>
+        <p class="numEmployees">Number of Employees: <%= @company.num_employees %></p>
+        <p class="companyCategory">Sector: <%= @company.category %></p>
+        <% if @company.rating %>
+          <p class="companyRating">Rating: <%= link_to(@company.rating, "http://www.careerbliss.com/#{@company.name.downcase.strip.gsub(' ', '-')}/reviews/", target: "blank") %></p>
+        <% end %>
+      </div>
     </div>
-  </section>
+  </div>
+<div id="companyWrapper">
+  <div class="companyJobs">
+    <% if @company.jobs.empty? %>
+    <h3>No Jobs on Record</h3>
+    <h4><%= link_to("Add a Job", new_job_path) %></h4>
+    <% else %>
+    <h3>Hiring:</h3>
+    <table class="table table-hover">
+      <% @company.jobs.each do |job| %>
+      <tr class='job_row' href="/jobs/<%= job.id %>">
+        <td><%= "#{job.name}" %> </td>
+        <td><%= "#{job.location}" %> </td>
+      </tr>
+      <% end %>
+    </table> 
+    <% end %>
+  </div>
+  <div class="companyJobs">
+    <% if @company.contacts.empty? %>
+    <h3>No Contacts on Record</h3>
+    <h4><%= link_to("Add a Contact", new_contact_path) %></h4>
+
+    <% else %>
+    <h3>Contacts on Record</h3>
+    <div class="companyContacts">
+      <% @company.contacts.each do |contact| %>
+      <p><%= link_to("#{contact.title}, #{contact.first_name} #{contact.last_name}", contact_path(contact)) %></p>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
 </div>

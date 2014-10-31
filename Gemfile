@@ -1,5 +1,10 @@
 source 'https://rubygems.org'
 
+gem "rails_12factor"
+gem 'awesome_print'
+gem "chartkick"
+gem "geocoder"
+gem 'nokogiri'
 gem 'bootstrap-sass'
 gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -39,7 +44,7 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-group :test do 
+group :test, :development do 
   gem 'capybara'
   gem 'rspec-rails'
   gem 'simplecov'

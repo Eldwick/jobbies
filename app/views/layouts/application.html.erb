@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Jobbies</title>
+  <title>jobr</title>
+  <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -17,7 +18,7 @@
               <span class="icon-bar"></span>
             </button>
       <a id="logoHeader"class="navbar-brand" href="/">
-        Jobbies
+        jobr
       </a>
     </div>
     <div class="collapse navbar-collapse">
@@ -26,12 +27,37 @@
         <li><a href="/portal">Portal</a></li>
       </ul>
       <ul id="navLinks" class="nav navbar-nav navbar-right">
-        <li><a href="/signin">Companies</a></li>
-        <li><a href="/signin">Jobs</a></li>
-        <li><a href="/signin">Applications</a></li>
-        <li><a href="/signin">Contacts</a></li>
-        <li><a href="/signin">Tasks</a></li>
-        <li><a href="/signin">Account</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Companies<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/companies">All Companies</a></li>
+            <li><a href="#">Your Companies</a></li>
+            <li class="divider"></li>
+            <li><%= link_to("Add a Company", new_company_path) %></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jobs<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/jobs">All Jobs</a></li>
+            <li><a href="#">Your jobs</a></li>
+            <li class="divider"></li>
+            <li><%= link_to("Add a Job", new_job_path) %></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contacts<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="/contacts">All Contacts</a></li>
+            <li><a href="#">Your Contacts</a></li>
+            <li class="divider"></li>
+            <li><%= link_to("Add a Contact", new_contact_path) %></li>
+          </ul>
+        </li>
+        <li><a href="/applications">Applications</a></li>
+        <li><a href="/tasks">Tasks</a></li>
+        <li><%= link_to("Account", user_path(current_user)) %></li>
+        <li> <%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
       </ul>
       <% else %>
       <ul id="navLinks" class="nav navbar-nav navbar-right">
