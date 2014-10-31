@@ -8,7 +8,7 @@
   <%= submit_tag "Search Job"  %>
 <% end %>
 
-<table class="table">
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Company</th>
@@ -21,7 +21,7 @@
 
   <tbody>
     <% @jobs.each do |job| %>
-      <tr>
+      <tr class='company_row' href="/jobs/<%= job.id %>">
         <td><%= job.company.name %></td>
         <td><%= job.name %></td>
         <td><%= truncate job.description, :length => 230, :omission => "" , :escape => false %></td>

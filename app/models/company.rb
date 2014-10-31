@@ -3,6 +3,7 @@ require 'open-uri'
 class Company < ActiveRecord::Base
   has_many :contacts, dependent: :destroy
   has_many :jobs, dependent: :destroy
+  before_save :save_lat_long
   scope :search, -> (search) {where("lower(name) like ? AND lower(city) like ? AND lower(category) like ?", "%#{search[:name]}%", "%#{search[:city]}%", "%#{search[:category]}%").uniq}
   geocoded_by :address 
 
@@ -11,6 +12,13 @@ class Company < ActiveRecord::Base
     [street_address, city, state, zip_code].compact.join(', ')
   end
 
+  def self.addresses_array
+    addresses_array = []
+    limit(200).each do |company|
+      addresses_array << [company.latitude, company.longitude, company.name , company.id, company.img_url] if company.longitude 
+    end
+    addresses_array
+  end
   def self.populate 
     link = open("http://www.uspages.com/fortune500.htm")
 
@@ -155,5 +163,15 @@ class Company < ActiveRecord::Base
       end
     end
     company.save
+  end
+
+  def save_lat_long
+    if self.latitude.nil?
+      latlong = self.geocode
+      if latlong
+        self.latitude = latlong[0]
+        self.longitude = latlong[1]
+      end
+    end
   end
 end

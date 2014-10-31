@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   resources :companies
 
+  get '/map', to: "welcome#map", as: :map
+  
   get 'welcome/search', to: "welcome#search", as: :welcome_search
   
   get 'company/search', to: "companies#search", as: :company_search

@@ -2,6 +2,10 @@ class WelcomeController < ApplicationController
   before_action :authenticate_user!, only: [:portal]
   before_action :get_companies_jobs, only: [:splash]
 
+  def map
+    render "map"
+  end
+
   def splash
     @company = Company.new
   end
